@@ -1,6 +1,102 @@
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useProductContext } from "./context/ProductContext";
+import PageNavigation from "./components/PageNavigation";
+import MyImages from "./components/MyImages";
+import { Container } from "./styles/Container";
+import FormatPrice from "./helper/FormatPrice";
+import { TbTruckDelivery, TbReplace } from "react-icons/tb";
+import { MdSecurity } from "react-icons/md";
+import Star from "./components/Star";
+import AddToCart from "./components/AddToCart";
 
-return <Wrapper></Wrapper>;
+const API = "https://api.pujakaitem.com/api/products";
+
+const SingleProduct = () => {
+
+  const { getSingleProduct, isSingleLoading, singleProduct } = useProductContext();
+  // console.log(singleProduct);
+
+  const { id: test1, name, company, price, description, category, stock, reviews, stars, image } = singleProduct;
+
+  const { id } = useParams();
+  // console.log({id});
+
+  useEffect(() => {
+    getSingleProduct(`${API}?id=${id}`);
+  }, [])
+
+  if (isSingleLoading) {
+    return <div>Single page Loading......</div>
+  }
+  // const capitalizeWords = (str) => {
+  //   return str
+  //     .toLowerCase()
+  //     .split(' ')
+  //     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+  //     .join(' ');
+  // };
+  // const str1 = "HELLO WOrld";
+
+  return (
+    <Wrapper>
+      {/* <b>{capitalizeWords(str1)}</b> */}
+      <PageNavigation title={name} />
+      <Container className="container">
+        <div className="grid grid-two-column">
+          {/* product Images */}
+          <div className="product-images">
+            <MyImages imgs={image} />
+          </div>
+          {/* Product Data */}
+          <div className="product-data">
+            <h2>{name}</h2>
+            <Star stars = {stars} reviews = {reviews}/>
+            {/* <p>{stars}</p>
+            <p>{reviews} Reviews</p> */}
+            <p className="product-data-price">
+              MRP:
+              <del>
+                <FormatPrice price={price + 350000} />
+              </del>
+            </p>
+            <p className="product-data-price product-data-real-price">
+              Deal of the Day: <FormatPrice price = {price}/>
+            </p>
+            <h4>Description</h4>
+            <p>{description}</p>
+            <div className="product-data-warranty">
+              <div className="product-warranty-data">
+                <TbTruckDelivery className="warranty-icon"/>
+                <p>Free Delivery</p>
+              </div>
+              <div className="product-warranty-data">
+                <TbReplace className="warranty-icon"/>
+                <p>30 Days Replacement</p>
+              </div>
+              <div className="product-warranty-data">
+                <TbTruckDelivery className="warranty-icon"/>
+                <p>Custom Delivery</p>
+              </div>
+              <div className="product-warranty-data">
+                <MdSecurity className="warranty-icon"/>
+                <p>1 Year warranty</p>
+              </div>
+            </div>
+            <div className="product-data-info">
+              <p>Available: <span>{ stock > 0 ? "In Stock" : "Out Of Stock"}</span></p>
+              <p>ID: <span>{id}</span></p>
+              <p>Brand: <span>{company}</span></p>
+            </div>
+            <hr />
+            {stock > 0 && <AddToCart product={singleProduct}/>}
+          </div>
+        </div>
+      </Container>
+    </Wrapper>
+  )
+}
 
 const Wrapper = styled.section`
   .container {
