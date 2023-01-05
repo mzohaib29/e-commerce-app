@@ -41,7 +41,7 @@ gap: 1rem;
   justify-items: center;
   align-items: center;
   gap: 1rem;
-  width: 100%;
+  width: 30%;
 
   img {
     max-width: 100%;

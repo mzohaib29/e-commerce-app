@@ -108,6 +108,7 @@ const Wrapper = styled.section`
     align-items: flex-start;
     justify-content: center;
     gap: 2rem;
+    width: 80%;
 
     .product-data-warranty {
       width: 100%;

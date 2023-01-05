@@ -11,7 +11,7 @@ const FeaturedProduct = () => {
 
   return (
     <Wrapper className="section">
-      <div className="container">
+      <div className="container1">
         <div className="intro-data">Check Now</div>
         <div className="common-heading">Our Feature Service</div>
         <div className="grid grid-three-column">
@@ -27,12 +27,12 @@ const FeaturedProduct = () => {
 }
 
 const Wrapper = Styled.section`
-.container {
+.container1 {
   margin-bottom: 200px;
 }
-.grid.grid-three-column {
-  width: 100%
-}
+// .grid.grid-three-column {
+//   width: 100%
+// }
 `;
 
 export default FeaturedProduct;
