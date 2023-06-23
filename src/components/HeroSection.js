@@ -23,7 +23,7 @@ const HeroSection = ({myData}) => {
                 </figure>
 
             </div>
-
+            <div></div>
         </div>
 
     </Wrapper>

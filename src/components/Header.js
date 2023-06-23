@@ -25,4 +25,5 @@ const MainHeader = Styled.header`
   height: 5rem;
 }
 `;
+
 export default Header
